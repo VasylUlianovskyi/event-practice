@@ -29,10 +29,12 @@ module.exports.getAllEvents = async (req, res, next) => {
         {
           model: EventCategory,
           as: 'category',
+          attributes: ['name'],
         },
         {
           model: User,
           as: 'creator',
+          attributes: ['name'],
         },
       ],
       raw: true,
