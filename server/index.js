@@ -12,6 +12,6 @@ httpServer.listen(PORT, HOST, () =>
   console.log(`Server is listening http://${HOST}:${PORT}`)
 );
 
-sendMail();
+// sendMail();
 
-initJobs();
+// initJobs();

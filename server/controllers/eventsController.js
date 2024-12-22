@@ -1,6 +1,8 @@
 const { parse } = require('query-string');
 const {
   Event,
+  EventCategory,
+  User,
   Sequelize: { Op },
 } = require('./../db/models');
 
@@ -23,11 +25,22 @@ module.exports.getAllEvents = async (req, res, next) => {
     const foundEvents = await Event.findAll({
       where: parcedQuery,
       attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: [
+        {
+          model: EventCategory,
+          as: 'category',
+        },
+        {
+          model: User,
+          as: 'creator',
+        },
+      ],
       raw: true,
     });
     res.status(200).send({ data: foundEvents });
   } catch (err) {
     next(err);
+    console.log(err);
   }
 };
 // where: { creatorId: 1, isOnline: true, categoryId: {[Op]:[2,3]} },
